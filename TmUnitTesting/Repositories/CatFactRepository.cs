@@ -38,11 +38,11 @@ namespace TmUnitTesting.Repositories
             {
                 if (maxLength.HasValue)
                 {
-                    query["?limit"] = factLimit.ToString();
+                    query["&limit"] = factLimit.ToString();
                 }
                 else
                 {
-                    query["&limit"] = factLimit.ToString();
+                    query["?limit"] = factLimit.ToString();
                 }
             }
             return query;
