@@ -17,7 +17,7 @@ namespace TmUnitTesting.Controllers
         }
 
         [HttpGet]
-        public async Task<CatFactResponse> GetCatFacts(string name, int? maxLength, int? factLimit)
+        public async Task<CatFactResponse> CatFacts(string name, int? maxLength, int? factLimit)
         {
             _logger.LogInformation("{0} called by user", System.Reflection.MethodBase.GetCurrentMethod()?.Name);
             var factsWithSubstitions = await _catFactService.GetCatFactsWithNameSubstitution(name, maxLength, factLimit);
