@@ -12,7 +12,7 @@ namespace TmUnitTesting.Services
             _catFactRepository = catFactRepository;
         }
 
-        public async Task<CatFactEntity> GetCatFactsWithName(string name, int? maxLength, int? factLimit)
+        public async Task<CatFactEntity> GetCatFactsWithNameSubstitution(string name, int? maxLength, int? factLimit)
         {
             var catFacts = await _catFactRepository.GetCatFacts(maxLength, factLimit);
             foreach (var catFact in catFacts.Data)
