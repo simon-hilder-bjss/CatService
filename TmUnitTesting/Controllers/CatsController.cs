@@ -19,7 +19,7 @@ namespace TmUnitTesting.Controllers
         [HttpGet]
         public async Task<CatFactResponse> CatFacts(string name, int? maxLength, int? factLimit)
         {
-            _logger.LogInformation("{0} called by user", System.Reflection.MethodBase.GetCurrentMethod()?.Name);
+            _logger.LogInformation("Get CatFacts triggered with the following name: {name}", name);
             var factsWithSubstitions = await _catFactService.GetCatFactsWithNameSubstitution(name, maxLength, factLimit);
             return new CatFactResponse(factsWithSubstitions, name);
         }
