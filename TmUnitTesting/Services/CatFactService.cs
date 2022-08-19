@@ -1,11 +1,14 @@
-﻿using TmUnitTesting.Models;
+﻿/* https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/models-data/validating-with-a-service-layer-cs */
+
+using System.Text.RegularExpressions;
+using TmUnitTesting.Models;
 using TmUnitTesting.Repositories;
 
 namespace TmUnitTesting.Services
 {
     public class CatFactService : ICatFactService
     {
-        private ICatFactRepository _catFactRepository;
+        private readonly ICatFactRepository _catFactRepository;
 
         public CatFactService(ICatFactRepository catFactRepository)
         {
@@ -17,7 +20,7 @@ namespace TmUnitTesting.Services
             var catFacts = await _catFactRepository.GetCatFacts(maxLength, factLimit);
             foreach (var catFact in catFacts.Data)
             {
-                catFact.Fact = catFact.Fact?.Replace("cat", name);
+                catFact.Fact = Regex.Replace(catFact.Fact, "[Cc]at", name);
             }
             return catFacts;
         }

@@ -1,5 +1,4 @@
 using Autofac.Extras.Moq;
-using Microsoft.Extensions.Logging;
 using Moq;
 using System.Text.Json;
 using TmUnitTesting.Controllers;
