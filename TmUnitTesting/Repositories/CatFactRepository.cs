@@ -28,7 +28,10 @@ namespace TmUnitTesting.Repositories
             }
             var queryParams = Helpers.ConstructQueryString(paramList);
             var response = await _httpClient.GetAsync($"{_baseUrl}{queryParams}");
-            return await JsonSerializer.DeserializeAsync<CatFactEntity>(response.Content.ReadAsStream());
+            return await JsonSerializer.DeserializeAsync<CatFactEntity>(response.Content.ReadAsStream(), new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
         }
     }
 }
