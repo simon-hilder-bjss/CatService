@@ -1,13 +1,9 @@
 ﻿using Autofac.Extras.Moq;
 using Moq;
 using Moq.Protected;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using TmUnitTesting.Models;
 using TmUnitTesting.Repositories;
 using Xunit;
@@ -16,22 +12,22 @@ namespace TmUnitTesting.UnitTests
 {
     public class TestCatFactRepository
     {
-        [Fact]
-        public async void GetCatFacts_Calls_HttpClient_AndDeserializesResponse_WithNoQueryParameters()
+        private static readonly string mockResponse = JsonSerializer.Serialize(new CatFactEntity()
         {
-            using var mock = AutoMock.GetLoose();
-
-            var serializedResponse = JsonSerializer.Serialize(new CatFactEntity()
-            {
-                Data = new List<CatFactDetails>()
+            Data = new List<CatFactDetails>()
                 {
                     new CatFactDetails()
                     {
                         Fact = "test"
                     }
                 }
-            });
-            var mockHttpClient = SetupHttpClient(serializedResponse);
+        });
+
+        [Fact]
+        public async void GetCatFacts_Calls_HttpClient_AndDeserializesResponse_WithNoQueryParameters()
+        {
+            using var mock = AutoMock.GetLoose();
+            var mockHttpClient = SetupHttpClient(mockResponse);
 
             mock.Mock<IHttpClientFactory>()
                 .Setup(client => client.CreateClient(It.IsAny<string>())).Returns(mockHttpClient);
@@ -46,18 +42,7 @@ namespace TmUnitTesting.UnitTests
         public async void GetCatFacts_Calls_HttpClient_AndDeserializesResponse_WithQueryParameters()
         {
             using var mock = AutoMock.GetLoose();
-
-            var serializedResponse = JsonSerializer.Serialize(new CatFactEntity()
-            {
-                Data = new List<CatFactDetails>()
-                {
-                    new CatFactDetails()
-                    {
-                        Fact = "test"
-                    }
-                }
-            });
-            var mockHttpClient = SetupHttpClient(serializedResponse);
+            var mockHttpClient = SetupHttpClient(mockResponse);
 
             mock.Mock<IHttpClientFactory>()
                 .Setup(client => client.CreateClient(It.IsAny<string>())).Returns(mockHttpClient);
