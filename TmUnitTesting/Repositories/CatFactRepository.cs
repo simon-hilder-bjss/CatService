@@ -9,11 +9,6 @@ namespace TmUnitTesting.Repositories
     {
         private static readonly string _baseUrl = "https://catfact.ninja/facts";
         private readonly HttpClient _httpClient;
-        private readonly JsonSerializerOptions serializerOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true
-        };
 
         public CatFactRepository(IHttpClientFactory httpClientFactory)
         {
@@ -24,7 +19,7 @@ namespace TmUnitTesting.Repositories
         {
             var queryParams = ConstructQueryString(maxLength, factLimit);
             var response = await _httpClient.GetAsync($"{_baseUrl}?{queryParams}");
-            return await JsonSerializer.DeserializeAsync<CatFactEntity>(response.Content.ReadAsStream(), serializerOptions);
+            return await JsonSerializer.DeserializeAsync<CatFactEntity>(response.Content.ReadAsStream());
         }
 
         private static NameValueCollection ConstructQueryString(int? maxLength, int? factLimit)
