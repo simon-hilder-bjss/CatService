@@ -17,7 +17,7 @@ namespace TmUnitTesting.UnitTests
     public class TestCatFactRepository
     {
         [Fact]
-        public async void GetCatFacts_Calls_HttpClient_AndDeserializesResponse()
+        public async void GetCatFacts_Calls_HttpClient_AndDeserializesResponse_WithNoQueryParameters()
         {
             using var mock = AutoMock.GetLoose();
 
@@ -38,6 +38,32 @@ namespace TmUnitTesting.UnitTests
 
             var catFactRepository = mock.Create<CatFactRepository>();
             var response = await catFactRepository.GetCatFacts(null, null);
+
+            Assert.Equal("test", response.Data[0].Fact);
+        }
+
+        [Fact]
+        public async void GetCatFacts_Calls_HttpClient_AndDeserializesResponse_WithQueryParameters()
+        {
+            using var mock = AutoMock.GetLoose();
+
+            var serializedResponse = JsonSerializer.Serialize(new CatFactEntity()
+            {
+                Data = new List<CatFactDetails>()
+                {
+                    new CatFactDetails()
+                    {
+                        Fact = "test"
+                    }
+                }
+            });
+            var mockHttpClient = SetupHttpClient(serializedResponse);
+
+            mock.Mock<IHttpClientFactory>()
+                .Setup(client => client.CreateClient(It.IsAny<string>())).Returns(mockHttpClient);
+
+            var catFactRepository = mock.Create<CatFactRepository>();
+            var response = await catFactRepository.GetCatFacts(1, 1);
 
             Assert.Equal("test", response.Data[0].Fact);
         }

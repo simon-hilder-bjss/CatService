@@ -1,6 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Text.Json;
-using System.Web;
+﻿using System.Text.Json;
 using TmUnitTesting.Models;
 
 namespace TmUnitTesting.Repositories
@@ -8,6 +6,8 @@ namespace TmUnitTesting.Repositories
     public class CatFactRepository : ICatFactRepository
     {
         private static readonly string _baseUrl = "https://catfact.ninja/facts";
+        private static readonly string _maxLengthParamKey = "max_length";
+        private static readonly string _factLimitParamKey = "limit";
         private readonly HttpClient _httpClient;
 
         public CatFactRepository(IHttpClientFactory httpClientFactory)
@@ -17,23 +17,18 @@ namespace TmUnitTesting.Repositories
 
         public async Task<CatFactEntity> GetCatFacts(int? maxLength, int? factLimit)
         {
-            var queryParams = ConstructQueryString(maxLength, factLimit);
-            var response = await _httpClient.GetAsync($"{_baseUrl}?{queryParams}");
-            return await JsonSerializer.DeserializeAsync<CatFactEntity>(response.Content.ReadAsStream());
-        }
-
-        private static NameValueCollection ConstructQueryString(int? maxLength, int? factLimit)
-        {
-            var query = HttpUtility.ParseQueryString(string.Empty);
+            var paramList = new List<KeyValuePair<string, string>>();
             if (maxLength.HasValue)
             {
-                query.Add("max_length", maxLength.ToString());
+                paramList.Add(new KeyValuePair<string, string>(_maxLengthParamKey, maxLength.ToString()));
             }
             if (factLimit.HasValue)
             {
-                query.Add("limit", factLimit.ToString());
+                paramList.Add(new KeyValuePair<string, string>(_factLimitParamKey, factLimit.ToString()));
             }
-            return query;
+            var queryParams = Helpers.ConstructQueryString(paramList);
+            var response = await _httpClient.GetAsync($"{_baseUrl}{queryParams}");
+            return await JsonSerializer.DeserializeAsync<CatFactEntity>(response.Content.ReadAsStream());
         }
     }
 }
