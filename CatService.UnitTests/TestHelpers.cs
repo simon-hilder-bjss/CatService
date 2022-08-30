@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace TmUnitTesting.UnitTests
+namespace CatService.UnitTests
 {
     public class TestHelpers
     {

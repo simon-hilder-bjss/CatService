@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TmUnitTesting.Models;
-using TmUnitTesting.Services;
+using CatService.Models;
+using CatService.Services;
 
-namespace TmUnitTesting.Controllers
+namespace CatService.Controllers
 {
     public class CatsController : Controller
     {

@@ -1,10 +1,10 @@
 ﻿/* https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/models-data/validating-with-a-service-layer-cs */
 
 using System.Text.RegularExpressions;
-using TmUnitTesting.Models;
-using TmUnitTesting.Repositories;
+using CatService.Models;
+using CatService.Repositories;
 
-namespace TmUnitTesting.Services
+namespace CatService.Services
 {
     public class CatFactService : ICatFactService
     {

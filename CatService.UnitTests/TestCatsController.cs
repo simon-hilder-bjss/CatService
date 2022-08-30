@@ -1,12 +1,12 @@
 using Autofac.Extras.Moq;
 using Moq;
 using System.Text.Json;
-using TmUnitTesting.Controllers;
-using TmUnitTesting.Models;
-using TmUnitTesting.Services;
+using CatService.Controllers;
+using CatService.Models;
+using CatService.Services;
 using Xunit;
 
-namespace TmUnitTesting.UnitTests
+namespace CatService.UnitTests
 {
     public class TestCatsController
     {

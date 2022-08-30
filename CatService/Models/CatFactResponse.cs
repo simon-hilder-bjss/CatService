@@ -1,4 +1,4 @@
-﻿namespace TmUnitTesting.Models
+﻿namespace CatService.Models
 {
     public class CatFactResponse
     {

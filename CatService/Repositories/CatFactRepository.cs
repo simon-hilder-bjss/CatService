@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using TmUnitTesting.Models;
+using CatService.Models;
 
-namespace TmUnitTesting.Repositories
+namespace CatService.Repositories
 {
     public class CatFactRepository : ICatFactRepository
     {

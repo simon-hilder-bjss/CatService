@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Web;
 
-namespace TmUnitTesting
+namespace CatService
 {
     public static class Helpers
     {

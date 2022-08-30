@@ -1,5 +1,5 @@
-using TmUnitTesting.Repositories;
-using TmUnitTesting.Services;
+using CatService.Repositories;
+using CatService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

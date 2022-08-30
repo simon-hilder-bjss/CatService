@@ -4,11 +4,11 @@ using Moq.Protected;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using TmUnitTesting.Models;
-using TmUnitTesting.Repositories;
+using CatService.Models;
+using CatService.Repositories;
 using Xunit;
 
-namespace TmUnitTesting.UnitTests
+namespace CatService.UnitTests
 {
     public class TestCatFactRepository
     {

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TmUnitTesting.Models;
-using TmUnitTesting.Repositories;
-using TmUnitTesting.Services;
+using CatService.Models;
+using CatService.Repositories;
+using CatService.Services;
 using Xunit;
 
-namespace TmUnitTesting.UnitTests
+namespace CatService.UnitTests
 {
     public class TestCatFactService
     {

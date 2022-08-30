@@ -1,6 +1,6 @@
-﻿using TmUnitTesting.Models;
+﻿using CatService.Models;
 
-namespace TmUnitTesting.Services
+namespace CatService.Services
 {
     public interface ICatFactService
     {
